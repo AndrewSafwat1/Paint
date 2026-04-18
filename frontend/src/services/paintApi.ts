@@ -58,19 +58,25 @@ export const paintApi = {
     return jsonPostVoid(`${BASE}/clearAll`)
   },
 
-  save(path: string, idCounter: string): Promise<void> {
-    return fetch(`${BASE}/save`, {
+  /** Download file content from the backend (browser file-dialog save flow). */
+  saveContent(format: string, idCounter: string): Promise<string> {
+    return fetch(`${BASE}/saveContent?${new URLSearchParams({ format, idCounter })}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ path, idCounter }),
-    }).then(() => void 0)
+    }).then(async r => {
+      if (!r.ok) throw new Error('Save failed')
+      return r.text()
+    })
   },
 
-  load(path: string): Promise<{ idCounter: number; lastUpdate: AnyShape[] }> {
-    return fetch(`${BASE}/load`, {
+  /** Upload file content to the backend (browser file-dialog load flow). */
+  loadContent(content: string, format: string): Promise<{ idCounter: string; lastUpdate: AnyShape[] }> {
+    return fetch(`${BASE}/loadContent?format=${encodeURIComponent(format)}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ path }),
-    }).then(r => r.json())
+      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+      body: content,
+    }).then(async r => {
+      if (!r.ok) throw new Error('Load failed')
+      return r.json()
+    })
   },
 }

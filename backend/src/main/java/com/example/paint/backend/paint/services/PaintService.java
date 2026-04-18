@@ -137,4 +137,27 @@ public class PaintService {
         if (path.endsWith("json")) return loadFromJson(path);
         return null;
     }
+
+    // ── string-based save/load for browser file-dialog endpoints ───────────
+    public String saveAsString(String format, String idCounter) throws IOException {
+        Save save = new Save();
+        save.setIdCounter(idCounter);
+        save.setLastUpdate(getCurrentState());
+        if ("xml".equals(format))  return save.toXmlString();
+        if ("json".equals(format)) return save.toJsonString();
+        throw new IllegalArgumentException("Unknown format: " + format);
+    }
+
+    public Save loadFromContent(String content, String format) throws IOException {
+        Save loaded;
+        if ("xml".equals(format))       loaded = Save.fromXmlString(content);
+        else if ("json".equals(format)) loaded = Save.fromJsonString(content);
+        else throw new IllegalArgumentException("Unknown format: " + format);
+
+        if (loaded != null) {
+            saveState(new ArrayList<>(loaded.getLastUpdate()));
+            rebuildMap();
+        }
+        return loaded;
+    }
 }

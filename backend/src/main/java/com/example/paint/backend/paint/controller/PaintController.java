@@ -120,4 +120,28 @@ public class PaintController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
+    /** Browser file-dialog save: returns file content as a string. */
+    @PostMapping("/saveContent")
+    public ResponseEntity<String> saveContent(@RequestParam String format, @RequestParam String idCounter) {
+        try {
+            return ResponseEntity.ok(paintService.saveAsString(format, idCounter));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save");
+        }
+    }
+
+    /** Browser file-dialog load: accepts file content in the request body. */
+    @PostMapping("/loadContent")
+    public ResponseEntity<Save> loadContent(@RequestParam String format, @RequestBody String content) {
+        try {
+            Save loaded = paintService.loadFromContent(content, format);
+            if (loaded != null) return ResponseEntity.ok(loaded);
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(null);
+        }
+    }
 }

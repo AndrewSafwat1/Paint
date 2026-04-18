@@ -73,7 +73,7 @@ header{
 }
 
 #load{
-    margin-left: calc(390px * 0.6);
+    margin-left: calc(10px * 0.6);
 }
 
 #save:hover, #load:hover{

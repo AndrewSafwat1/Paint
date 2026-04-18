@@ -1,17 +1,24 @@
 <script setup lang="ts">
-const props = defineProps<{
-  name: string
-  path: string
-  format: string
-}>()
+import { ref } from 'vue'
 
 const emit = defineEmits<{
-  (e: 'update:name', value: string): void
-  (e: 'update:path', value: string): void
-  (e: 'update:format', value: string): void
   (e: 'save'): void
-  (e: 'load'): void
+  (e: 'load', file: File): void
 }>()
+
+const fileInput = ref<HTMLInputElement | null>(null)
+
+function openFileDialog() {
+  fileInput.value?.click()
+}
+
+function onFileSelected(event: Event) {
+  const file = (event.target as HTMLInputElement).files?.[0]
+  if (file) {
+    emit('load', file)
+    ;(event.target as HTMLInputElement).value = ''
+  }
+}
 </script>
 
 <template>
@@ -37,8 +44,7 @@ const emit = defineEmits<{
           </button>
           <button
             id="load"
-            style="margin-right: 10px;"
-            @click="emit('load')"
+            @click="openFileDialog"
           >
             Load
           </button>
@@ -47,54 +53,13 @@ const emit = defineEmits<{
             src="@/assets/load.png"
             alt=""
           >
-        </div>
-
-        <div class="inputs">
           <input
-            :value="props.name"
-            type="text"
-            class="name"
-            placeholder="Enter name of file"
-            style="display: inline;"
-            @input="emit('update:name', ($event.target as HTMLInputElement).value)"
+            ref="fileInput"
+            type="file"
+            accept=".xml,.json"
+            style="display: none"
+            @change="onFileSelected"
           >
-          <input
-            :value="props.path"
-            type="text"
-            class="save"
-            placeholder="File path to save (xml / json)"
-            @input="emit('update:path', ($event.target as HTMLInputElement).value)"
-          >
-          <input
-            :value="props.path"
-            type="text"
-            class="load"
-            placeholder="File path to load (xml / json)"
-            @input="emit('update:path', ($event.target as HTMLInputElement).value)"
-          >
-        </div>
-
-        <div class="format">
-          <ul id="extension">
-            <li id="xml">
-              <input
-                type="radio"
-                name="radio"
-                value="xml"
-                :checked="props.format === 'xml'"
-                @change="emit('update:format', 'xml')"
-              >xml
-            </li>
-            <li id="json">
-              <input
-                type="radio"
-                name="radio"
-                value="json"
-                :checked="props.format === 'json'"
-                @change="emit('update:format', 'json')"
-              >json
-            </li>
-          </ul>
         </div>
       </div>
     </header>
