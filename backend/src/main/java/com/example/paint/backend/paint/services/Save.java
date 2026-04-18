@@ -5,29 +5,18 @@ import java.beans.XMLEncoder;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import com.example.paint.backend.paint.services.shapes.shape;
+import com.example.paint.backend.paint.services.shapes.Shape;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Save {
-    
-    List<shape> lastUpdate = new ArrayList<>();
-    String idCounter = null;
 
-    public void setIdCounter(String idCounter){
-        this.idCounter = idCounter;
-    }
+    private List<Shape> lastUpdate = new ArrayList<>();
+    private String idCounter = null;
 
-    public void setLastUpdate(List<shape> lastUpdate){
-        this.lastUpdate = lastUpdate;
-    }
-
-    public String getIdCounter(){
-        return this.idCounter;
-    }
-
-    public List<shape> getLastUpdate(){
-        return this.lastUpdate;
-    }
+    public void setIdCounter(String idCounter)       { this.idCounter  = idCounter; }
+    public void setLastUpdate(List<Shape> lastUpdate) { this.lastUpdate = lastUpdate; }
+    public String getIdCounter()                     { return idCounter; }
+    public List<Shape> getLastUpdate()               { return lastUpdate; }
 
     public void saveToXML(String path) throws IOException {
         try (XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(path)))) {
@@ -40,23 +29,17 @@ public class Save {
             return (Save) decoder.readObject();
         }
     }
+
     public void saveToJson(String path) throws IOException {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.writeValue(new File(path), this);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        new ObjectMapper().writeValue(new File(path), this);
     }
-    public  static Save loadToJson(String path) throws IOException {
+
+    public static Save loadToJson(String path) throws IOException {
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            Save object = mapper.readValue(new File(path), Save.class);
-            return object;
+            return new ObjectMapper().readValue(new File(path), Save.class);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
-
     }
 }

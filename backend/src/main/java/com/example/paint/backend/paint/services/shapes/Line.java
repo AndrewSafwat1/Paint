@@ -4,56 +4,40 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.ArrayList;
 
 @JsonTypeName("line")
-public class Line extends shape{
+public class Line extends Shape {
     private ArrayList<Double> points;
-    private String lineCap ;
-    private String lineJoin ;
-    public Line (shapeDTO l) {
+    private String lineCap;
+    private String lineJoin;
+
+    public Line(ShapeDTO l) {
         super(l);
-        this.points = l.points ;
-        this.lineCap = l.lineCap ;
-        this.lineJoin = l.lineJoin ;
+        this.points  = l.points;
+        this.lineCap = l.lineCap;
+        this.lineJoin = l.lineJoin;
     }
-    public Line () {}
-    public Line (Line l) {
+
+    public Line(Line l) {
         super(l);
-        this.points = l.points ;
-        this.lineCap = l.lineCap ;
-        this.lineJoin = l.lineJoin ;
+        this.points  = l.points;
+        this.lineCap = l.lineCap;
+        this.lineJoin = l.lineJoin;
     }
 
-    public ArrayList<Double> getPoints() {
-        return points;
-    }
+    public Line() {}
 
-    public String getLineCap() {
-        return lineCap;
-    }
+    public ArrayList<Double> getPoints() { return points; }
+    public String getLineCap()           { return lineCap; }
+    public String getLineJoin()          { return lineJoin; }
 
-    public String getLineJoin() {
-        return lineJoin;
-    }
+    public void setPoints(ArrayList<Double> points) { this.points  = points; }
+    public void setLineCap(String lineCap)          { this.lineCap = lineCap; }
+    public void setLineJoin(String lineJoin)        { this.lineJoin = lineJoin; }
 
-    public void setLineCap(String lineCap) {
-        this.lineCap = lineCap;
-    }
-
-    public void setLineJoin(String lineJoin) {
-        this.lineJoin = lineJoin;
-    }
-
-    public void setPoints(ArrayList<Double> points) {
-        this.points = points;
-    }
-
-    public void drawShape() {
-
-    }
     @Override
-    public Line clone(String idNew) throws CloneNotSupportedException{
-        Line newShape = new Line(this);
-        newShape.setId(idNew);
-        newShape.setY(newShape.getY()-20);
-        return newShape ;
+    public Line clone(String idNew) throws CloneNotSupportedException {
+        Line copy = new Line(this);
+        copy.setId(idNew);
+        copy.setY(copy.getY() - 20);
+        return copy;
     }
 }

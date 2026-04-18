@@ -1,44 +1,36 @@
 package com.example.paint.backend.paint.services.shapes;
 
-import com.example.paint.backend.paint.services.PaintService;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 @JsonTypeName("square")
-public class Square extends shape{
-    private double width ;
-    private double height ;
-    public Square(shapeDTO s){
+public class Square extends Shape {
+    private double width;
+    private double height;
+
+    public Square(ShapeDTO s) {
         super(s);
-        this.height = s.height ;
-        this.width = s.width ;
+        this.width  = s.width;
+        this.height = s.height;
     }
-    public Square(Square s){
+
+    public Square(Square s) {
         super(s);
-        this.height = s.height ;
-        this.width = s.width ;
-    }
-    public Square(){}
-
-    public double getHeight() {
-        return height;
+        this.width  = s.width;
+        this.height = s.height;
     }
 
-    public double getWidth() {
-        return width;
-    }
+    public Square() {}
 
-    public void setHeight(double height) {
-        this.height = height;
-    }
+    public double getWidth()  { return width; }
+    public double getHeight() { return height; }
 
-    public void setWidth(double width) {
-        this.width = width;
-    }
+    public void setWidth(double width)   { this.width  = width; }
+    public void setHeight(double height) { this.height = height; }
+
     @Override
-    public Square clone(String idNew)throws CloneNotSupportedException{
-        Square newShape = new Square(this);
-        newShape.setId(idNew);
-        return newShape ;
+    public Square clone(String idNew) throws CloneNotSupportedException {
+        Square copy = new Square(this);
+        copy.setId(idNew);
+        return copy;
     }
-
 }
