@@ -280,9 +280,10 @@ function createElement(event: MouseEvent): void {
 </script>
 
 <template>
-  <section>
+  <section class="canvas-section">
     <div
       id="container"
+      class="canvas-container"
       @click="createElement"
     >
       <v-stage
@@ -348,3 +349,23 @@ function createElement(event: MouseEvent): void {
     </div>
   </section>
 </template>
+
+<style scoped>
+.canvas-section {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 300px 24px 96px;
+}
+
+.canvas-container {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+}
+</style>
