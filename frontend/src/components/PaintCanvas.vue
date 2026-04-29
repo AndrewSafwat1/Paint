@@ -3,6 +3,7 @@ import { inject, ref, shallowRef, reactive, watch, onMounted, onUnmounted } from
 import { ShapeStateKey } from '../types/injectionKeys'
 import { paintApi } from '../services/paintApi'
 import type { AnyShape, LineShape } from '../types/shapes'
+import { buildShapeFromClick } from '../utils/buildShapeFromClick'
 
 const state = inject(ShapeStateKey)!
 const {
@@ -241,34 +242,7 @@ function createElement(event: MouseEvent): void {
   const color = activeColor.value
   const id = state.nextId()
 
-  let shape: AnyShape | null = null
-
-  switch (shapeVariable.value) {
-    case 1:
-      shape = { x: cx - 50, y: cy - 50, width: 100, height: 100, fill: color, stroke: 'black', strokeWidth: 3, draggable: true, name: 'square', scaleX: 1, scaleY: 1, id }
-      break
-    case 2:
-      shape = { x: cx - 100, y: cy - 50, width: 200, height: 100, fill: color, stroke: 'black', draggable: true, strokeWidth: 3, name: 'rectangle', id }
-      break
-    case 3:
-      shape = { x: cx, y: cy, radiusX: 100, radiusY: 50, fill: color, stroke: 'black', draggable: true, strokeWidth: 3, name: 'elipse', id }
-      break
-    case 4:
-      shape = { x: cx, y: cy, sides: 3, radius: 100, fill: color, stroke: 'black', draggable: true, strokeWidth: 3, name: 'triangle', id }
-      break
-    case 5:
-      shape = { x: cx, y: cy, radius: 60, fill: color, stroke: 'black', draggable: true, strokeWidth: 3, name: 'circle', id }
-      break
-    case 6:
-      shape = { points: [cx - 100, cy - 100, cx + 100, cy + 100], stroke: color, strokeWidth: 10, lineCap: 'round', lineJoin: 'round', draggable: true, name: 'line', id }
-      break
-    case 7:
-      shape = { x: cx, y: cy, sides: 5, radius: 70, fill: color, stroke: 'black', draggable: true, strokeWidth: 3, name: 'pentagon', id }
-      break
-    case 8:
-      shape = { x: cx, y: cy, sides: 6, radius: 70, fill: color, stroke: 'black', strokeWidth: 3, draggable: true, name: 'hexagon', id }
-      break
-  }
+  const shape = buildShapeFromClick(shapeVariable.value, cx, cy, color, id)
 
   if (shape) {
     state.addShape(shape)

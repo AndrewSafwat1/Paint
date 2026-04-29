@@ -10,7 +10,7 @@ public class ShapeFactory {
             case "line":      return new Line(dto);
             case "square":    return new Square(dto);
             case "rectangle": return new Rectangle(dto);
-            case "elipse":    return new Elipse(dto);
+            case "ellipse":   return new Ellipse(dto);
             case "circle":    return new Circle(dto);
             case "triangle":
             case "pentagon":
@@ -24,7 +24,7 @@ public class ShapeFactory {
             case "line":      return new Line((Line) s);
             case "square":    return new Square((Square) s);
             case "rectangle": return new Rectangle((Rectangle) s);
-            case "elipse":    return new Elipse((Elipse) s);
+            case "ellipse":   return new Ellipse((Ellipse) s);
             case "circle":    return new Circle((Circle) s);
             case "triangle":
             case "pentagon":

@@ -29,9 +29,8 @@ export interface CircleShape extends BaseShape {
   radius: number
 }
 
-// Intentionally misspelled to match backend
 export interface EllipseShape extends BaseShape {
-  name: 'elipse'
+  name: 'ellipse'
   radiusX: number
   radiusY: number
 }

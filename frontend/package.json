@@ -6,7 +6,10 @@
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "eslint src/",
-    "lint:fix": "eslint src/ --fix"
+    "lint:fix": "eslint src/ --fix",
+    "test:unit": "vitest run",
+    "test:unit:watch": "vitest",
+    "test:unit:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "core-js": "^3.8.3",
@@ -16,12 +19,17 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@vitejs/plugin-vue": "^6.0.6",
+    "@vitest/coverage-v8": "^4.1.4",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-typescript": "^5.0.9",
     "@vue/cli-service": "~5.0.0",
+    "@vue/test-utils": "^2.4.6",
     "eslint": "^10.2.1",
     "eslint-plugin-vue": "^10.8.0",
     "globals": "^17.5.0",
-    "typescript": "^6.0.3"
+    "happy-dom": "^20.9.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.4"
   }
 }

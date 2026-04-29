@@ -2,24 +2,24 @@ package com.example.paint.backend.paint.services.shapes;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
-@JsonTypeName("elipse")
-public class Elipse extends Shape {
+@JsonTypeName("ellipse")
+public class Ellipse extends Shape {
     private double radiusX;
     private double radiusY;
 
-    public Elipse(ShapeDTO e) {
+    public Ellipse(ShapeDTO e) {
         super(e);
         this.radiusX = e.radiusX;
         this.radiusY = e.radiusY;
     }
 
-    public Elipse(Elipse e) {
+    public Ellipse(Ellipse e) {
         super(e);
         this.radiusX = e.radiusX;
         this.radiusY = e.radiusY;
     }
 
-    public Elipse() {}
+    public Ellipse() {}
 
     public double getRadiusX() { return radiusX; }
     public double getRadiusY() { return radiusY; }
@@ -28,8 +28,8 @@ public class Elipse extends Shape {
     public void setRadiusY(double radiusY) { this.radiusY = radiusY; }
 
     @Override
-    public Elipse clone(String idNew) throws CloneNotSupportedException {
-        Elipse copy = new Elipse(this);
+    public Ellipse clone(String idNew) throws CloneNotSupportedException {
+        Ellipse copy = new Ellipse(this);
         copy.setId(idNew);
         return copy;
     }

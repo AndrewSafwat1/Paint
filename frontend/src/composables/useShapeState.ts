@@ -40,7 +40,7 @@ export function useShapeState() {
       case 'circle':
         circles.value.push(shape as CircleShape)
         break
-      case 'elipse':
+      case 'ellipse':
         ellipses.value.push(shape as EllipseShape)
         break
       case 'triangle':
@@ -125,7 +125,7 @@ export function useShapeState() {
       case 'square':
       case 'rectangle': return rectangles.value as AnyShape[]
       case 'circle': return circles.value as AnyShape[]
-      case 'elipse': return ellipses.value as AnyShape[]
+      case 'ellipse': return ellipses.value as AnyShape[]
       case 'triangle': return triangles.value as AnyShape[]
       case 'pentagon': return pentagons.value as AnyShape[]
       case 'hexagon': return hexagons.value as AnyShape[]

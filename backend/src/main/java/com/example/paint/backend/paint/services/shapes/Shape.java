@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Square.class,    name = "square"),
         @JsonSubTypes.Type(value = Circle.class,    name = "circle"),
-        @JsonSubTypes.Type(value = Elipse.class,    name = "elipse"),
+        @JsonSubTypes.Type(value = Ellipse.class,   name = "ellipse"),
         @JsonSubTypes.Type(value = Rectangle.class, name = "rectangle"),
         @JsonSubTypes.Type(value = Line.class,      name = "line"),
         @JsonSubTypes.Type(value = Triangle.class,  name = "triangle"),
