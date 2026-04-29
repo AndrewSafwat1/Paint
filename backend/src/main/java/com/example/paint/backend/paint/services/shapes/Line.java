@@ -37,7 +37,7 @@ public class Line extends Shape {
     public Line clone(String idNew) throws CloneNotSupportedException {
         Line copy = new Line(this);
         copy.setId(idNew);
-        copy.setY(copy.getY() - 20);
+        copy.setY(getY() - 20);
         return copy;
     }
 }

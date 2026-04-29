@@ -15,7 +15,7 @@ public class Save {
     private String idCounter = null;
 
     public void setIdCounter(String idCounter)        { this.idCounter  = idCounter; }
-    public void setLastUpdate(List<Shape> lastUpdate)  { this.lastUpdate = lastUpdate; }
+    public void setLastUpdate(List<Shape> lastUpdate)  { this.lastUpdate = new ArrayList<>(lastUpdate); }
     public String getIdCounter()                      { return idCounter; }
     public List<Shape> getLastUpdate()                { return lastUpdate; }
 

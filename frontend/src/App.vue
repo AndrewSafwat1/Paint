@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { provide, shallowRef } from 'vue'
 import { useShapeState } from './composables/useShapeState'
+import { useKeyboardShortcuts } from './composables/useKeyboardShortcuts'
 import { ShapeStateKey } from './types/injectionKeys'
 import { paintApi } from './services/paintApi'
 import AppHeader from './components/AppHeader.vue'
@@ -10,6 +11,7 @@ import PaintCanvas from './components/PaintCanvas.vue'
 
 const state = useShapeState()
 provide(ShapeStateKey, state)
+useKeyboardShortcuts(state)
 
 const toastError = shallowRef('')
 

@@ -1,10 +1,12 @@
 package com.example.paint.backend.paint.services.shapes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, visible = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "name", include = JsonTypeInfo.As.PROPERTY, visible = true)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Square.class,    name = "square"),
         @JsonSubTypes.Type(value = Circle.class,    name = "circle"),
@@ -61,7 +63,7 @@ public abstract class Shape implements Cloneable {
 
     public abstract Shape clone(String idNew) throws CloneNotSupportedException;
 
-    public String getName()        { return name; }
+    @JsonIgnore public String getName()        { return name; }
     public double getRotation()    { return rotation; }
     public double getStrokeWidth() { return strokeWidth; }
     public double getX()           { return x; }
@@ -73,7 +75,7 @@ public abstract class Shape implements Cloneable {
     public double getScaleX()      { return scaleX; }
     public double getScaleY()      { return scaleY; }
 
-    public void setName(String name)           { this.name = name; }
+    @JsonProperty("name") public void setName(String name) { this.name = name; }
     public void setId(String id)               { this.id = id; }
     public void setDraggable(boolean d)        { this.draggable = d; }
     public void setFill(String fill)           { this.fill = fill; }
