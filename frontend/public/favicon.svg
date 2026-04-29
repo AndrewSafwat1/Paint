@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Palette body -->
+  <path d="M50 10 C20 10 5 28 5 50 C5 72 22 90 50 90 C62 90 68 84 68 76 C68 70 64 65 64 60 C64 55 68 52 74 52 C82 52 95 58 95 50 C95 28 80 10 50 10 Z" fill="#c8a470" stroke="#a07840" stroke-width="2"/>
+  <!-- Thumb hole -->
+  <circle cx="28" cy="38" r="9" fill="#1a1a1a"/>
+  <!-- Paint blobs -->
+  <circle cx="52" cy="22" r="7" fill="#e74c3c"/>
+  <circle cx="70" cy="30" r="7" fill="#f39c12"/>
+  <circle cx="78" cy="48" r="7" fill="#2ecc71"/>
+  <circle cx="62" cy="70" r="7" fill="#3498db"/>
+  <circle cx="42" cy="78" r="7" fill="#9b59b6"/>
+  <circle cx="22" cy="58" r="7" fill="#e91e8c"/>
+</svg>
